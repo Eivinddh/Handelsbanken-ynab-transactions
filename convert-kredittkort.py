@@ -18,7 +18,7 @@ def convert_csv(input_file, output_file):
             inflow = amount if amount > 0 else ''
             writer.writerow({
                 'Date': date,
-                'Payee': 'Kredittkort - Handelsbanken',
+                'Payee': 'Brukskonto - Handelsbanken' if inflow > 0 else 'Kredittkort - Handelsbanken',
                 'Memo': description,
                 'Outflow': outflow,
                 'Inflow': inflow
