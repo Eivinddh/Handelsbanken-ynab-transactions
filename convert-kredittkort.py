@@ -1,5 +1,6 @@
 import csv
 from datetime import datetime
+import sys
 
 def convert_csv(input_file, output_file):
     with open(input_file, mode='r', encoding='utf-8-sig') as infile, open(output_file, mode='w', encoding='utf-8', newline='') as outfile:
@@ -18,13 +19,16 @@ def convert_csv(input_file, output_file):
             inflow = amount if amount > 0 else ''
             writer.writerow({
                 'Date': date,
-                'Payee': 'Brukskonto - Handelsbanken' if inflow > 0 else 'Kredittkort - Handelsbanken',
+                #'Payee': 'Brukskonto - Handelsbanken' if inflow != '' and inflow > 0 else 'Kredittkort - Handelsbanken',
                 'Memo': description,
                 'Outflow': outflow,
                 'Inflow': inflow
             })
 
 if __name__ == "__main__":
-    input_file = 'input.csv'  # Replace with your input file path
+    if len(sys.argv) > 1:
+        input_file = sys.argv[1]
+    else:
+        input_file = 'input.csv'  # Default if no argument is given
     output_file = 'output.csv'  # Replace with your output file path
     convert_csv(input_file, output_file)
