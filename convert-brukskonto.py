@@ -16,7 +16,7 @@ def convert_csv(input_file, output_file):
             inflow = row['Beløp inn']
             writer.writerow({
                 'Date': date,
-                'Payee': 'Brukskonto - Handelsbanken',
+                'Payee': '', # TODO
                 'Memo': row['Melding/KID/Fakt.nr'],
                 'Outflow': outflow if outflow else '',
                 'Inflow': inflow if inflow else ''

@@ -13,11 +13,12 @@ def convert_csv(input_file, output_file):
             if not any(row.values()):  # Skip empty rows
                 continue
             # Parse date in format '18/06/2025' (day/month/year)
-            date = datetime.strptime(row['Dato'], '%d/%m/%Y').strftime('%Y-%m-%d')
+            print(row['Dato'])
+            date = datetime.strptime(row['Dato'], '%d.%m.%Y').strftime('%Y-%m-%d')
             memo = row['Forklaring'].strip()
             # Remove spaces from numbers for correct float conversion
-            outflow = row['Ut fra konto'].replace(' ', '').replace(',', '.').strip()
-            inflow = row['Inn på konto'].replace(' ', '').replace(',', '.').strip()
+            outflow = row['Ut fra konto'].replace(' ', '').replace(',', '.').replace('\xa0', '').strip()
+            inflow = row['Inn på konto'].replace(' ', '').replace(',', '.').replace('\xa0', '').strip()
             outflow = float(outflow) if outflow else ''
             inflow = float(inflow) if inflow else ''
             writer.writerow({
